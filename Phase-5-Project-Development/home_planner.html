@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="planner-page"><div class="planner-heading"><h1>Home Interior Budget Planner</h1><p>Plan your home with AI-powered budget recommendations.</p></div>
+<form method="post" class="planner-form reference-form"><div class="form-section"><h3>💰 Basic Information</h3><div class="form-grid"><div class="form-group"><label>Total Budget (₹)</label><input name="total_budget" type="number" min="1" value="{{ form_data.get('total_budget','5000') }}" required></div><div class="form-group"><label>Number of Lights</label><input name="num_lights" type="number" min="0" value="{{ form_data.get('num_lights','5') }}"></div></div></div>
+<div class="form-section"><h3>🏠 Rooms & Requirements</h3><div class="check-grid">{% for room in ['Living Room','Kitchen','Bedroom','Bathroom','Dining Room'] %}<label class="check-card"><input type="checkbox" name="rooms" value="{{ room }}" {% if room in form_data.get('rooms', []) %}checked{% endif %}><span>{{ room }}</span></label>{% endfor %}</div></div>
+<div class="form-section"><h3>🪑 Furniture & Fixtures</h3><div class="form-grid"><div class="form-group"><label>Number of Fans</label><input name="num_fans" type="number" min="0" value="{{ form_data.get('num_fans','4') }}"></div><div class="form-group"><label>Furniture Items</label><input name="num_furniture" type="number" min="0" value="{{ form_data.get('num_furniture','2') }}"></div><div class="form-group"><label>Dining Tables</label><input name="num_dining_tables" type="number" min="0" value="{{ form_data.get('num_dining_tables','1') }}"></div></div></div>
+<div class="form-section"><h3>💬 Additional Requirements</h3><div class="form-group"><textarea name="additional_requirements" placeholder="Modern style with good lighting">{{ form_data.get('additional_requirements','') }}</textarea></div></div>
+<button class="primary-submit" type="submit">▣ Generate Recommendations</button></form>
+{% if result %}{% include "_result.html" %}{% endif %}</section>
+{% endblock %}

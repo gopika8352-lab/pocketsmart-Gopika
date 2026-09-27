@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="planner-page"><div class="planner-heading"><h1>{{ record['title'] }}</h1><p>{{ record['planner_type']|title }} recommendation created on {{ record['created_at'] }}</p></div>{% include "_result.html" %}</section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="dashboard-page"><div class="dashboard-heading"><h1>Welcome, {{ user or 'User' }}!</h1><p>Plan smarter, spend wisely, and make confident decisions with PocketSmart AI.</p></div>
+<div class="dashboard-grid">
+<div class="planner-card"><div class="planner-visual home-visual">⌂</div><div class="planner-card-body"><h2>Home Budget Planner</h2><p>Plan furniture, lighting, fans and decor while staying within your budget.</p><a href="{{ url_for('home_planner') }}" class="card-button">Get Started</a></div></div>
+<div class="planner-card"><div class="planner-visual party-visual">♣</div><div class="planner-card-body"><h2>Party Budget Planner</h2><p>Organize venue, catering, decoration and entertainment expenses.</p><a href="{{ url_for('party_planner') }}" class="card-button">Get Started</a></div></div>
+<div class="planner-card"><div class="planner-visual jewelry-visual">◇</div><div class="planner-card-body"><h2>Jewelry Budget Planner</h2><p>Get occasion-based jewelry ideas within your preferred budget and style.</p><a href="{{ url_for('jewelry_planner') }}" class="card-button">Get Started</a></div></div>
+</div>
+<div class="history-cta"><a href="{{ url_for('history') }}">↻ &nbsp; View All Recommendation History</a></div>
+<div class="recent-panel"><div class="recent-title">↶ &nbsp; Recent Activity</div>{% if recent %}{% for r in recent %}<a class="recent-row" href="{{ url_for('history_detail', recommendation_id=r['id']) }}"><span class="recent-icon">{% if r['planner_type']=='home' %}⌂{% elif r['planner_type']=='party' %}♣{% else %}◇{% endif %}</span><span><strong>{{ r['title'] }}</strong><small>Budget: ₹{{ '%.0f'|format(r['budget']) }} · Created on {{ r['created_at'] }}</small></span></a>{% endfor %}{% else %}<div class="empty-state">No recommendations yet. Generate your first plan to see recent activity here.</div>{% endif %}</div>
+</section>
+{% endblock %}
